@@ -25,6 +25,9 @@ String.split("foo bar") # ["foo", "bar"]
 # Codepoints
 String.codepoints("hello") # ["h", "e", "l", "l", "o"]
 
+# Duplicate
+String.duplicate("abc", 3) # "abcabcabc
+
 # Trim
 String.trim("\n  abc\n  ") # "abc"
 
