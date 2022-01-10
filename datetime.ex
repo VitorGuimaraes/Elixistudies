@@ -1,3 +1,5 @@
+# Datetime is a implementation with timezone!
+
 # Builds a datetime from date and time structs
 # If the time zone is not passed it will default to "Etc/UTC"
 DateTime.new(~D[2016-05-24], ~T[13:26:08.003], "Etc/UTC") # {:ok, ~U[2016-05-24 13:26:08.003Z]}
@@ -38,7 +40,9 @@ DateTime.to_gregorian_seconds(dt)
 DateTime.from_iso8601("2015-01-23T23:50:07Z") # {:ok, ~U[2015-01-23 23:50:07Z], 0}
 
 # Converts the given datetime to ISO 8601 format
+# It also supports the "basic" format through passing the :basic option
 DateTime.to_iso8601(dt)
+DateTime.to_iso8601(dt, :basic)
 
 # Converts the given datetime to a string according to its calendar
 DateTime.to_string(dt)
@@ -57,3 +61,6 @@ DateTime.to_date(dt)
 
 # Converts a DateTime into Time
 DateTime.to_time(dt)
+
+# Changes the time zone of a DateTime
+DateTime.shift_zone(~U[2018-07-16 10:00:00Z], "America/Los_Angeles", FakeTimeZoneDatabase)
