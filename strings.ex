@@ -11,10 +11,10 @@ name = "Joseph"
 
 # Length
 country = "Deutschland"
-String.length(country)
+String.length(country) # 11
 
 # Replace
-String.replace("2027_12-25", "_", "-")
+String.replace("2027_12_25", "_", "-") # 2027-12-25
 
 # Slice
 String.slice("elixir", 0..3) # elix
