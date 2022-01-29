@@ -19,7 +19,10 @@ hd list  # ["apple"]
 tl(list) # ["melon", "orange", "strawberry"]
 tl list  # ["melon", "orange", "strawberry"]
 
-[head | tail] = [1, 2, 3] # head: [1] tail: [2, 3]
+[head | tail] = [1, 2, 3, 4, 5]  # head: [1] tail: [2, 3, 4, 5]
+
+# Use underline to ignore part of the list
+[head | _tail] = [1, 2, 3, 4, 5] # head: [1] tail: error
 
 # Cons Cells
 # Each con cell stores a pointer to the value and a pointer to the next cons cell
@@ -51,17 +54,20 @@ List.duplicate("hello", 3) # ["hello", "hello", "hello"]
 list = ["a", "b", "c"]
 List.first(list) # "a"
 
-# Returns a list with value inserted at the specified index
-list = [1, 2, 3]
-List.insert_at(list, 0, "a") # ["a", 1, 2, 3]
-
 # Returns the last element in list or default if list is empty.
 list = ["a", "b", "c"]
 List.last(list) # "c"
 
+# Returns a list with value inserted at the specified index
+list = [1, 2, 3]
+List.insert_at(list, 0, "a") # ["a", 1, 2, 3]
+
 # Returns and removes the value at the specified index in the list.
 list = ["a", "b", "c"]
 List.pop_at(list, 1) # {"b", ["a", "c"]}
+
+# Unpack list
+[a, b, c] = [1, 2, 3] # a = 1, b = 2, c = 3
 
 # Returns a list with a replaced value at the specified index.
 list = ["a", "b", "c"]
