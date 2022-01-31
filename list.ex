@@ -19,10 +19,10 @@ hd list  # ["apple"]
 tl(list) # ["melon", "orange", "strawberry"]
 tl list  # ["melon", "orange", "strawberry"]
 
-[head | tail] = [1, 2, 3, 4, 5]  # head: [1] tail: [2, 3, 4, 5]
+[head | tail] = [1, 2, 3, 4, 5]  # head: 1 tail: [2, 3, 4, 5]
 
 # Use underline to ignore part of the list
-[head | _tail] = [1, 2, 3, 4, 5] # head: [1] tail: error
+[head | _tail] = [1, 2, 3, 4, 5] # head: 1 tail: error
 
 # Cons Cells
 # Each con cell stores a pointer to the value and a pointer to the next cons cell
