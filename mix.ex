@@ -21,3 +21,7 @@ iex -S mix
 
 # Use your updated module: in iex, type "recompile"
 recompile
+recompile force: true
+
+# Install dependencies
+mix deps.get
