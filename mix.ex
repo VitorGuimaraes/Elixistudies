@@ -67,3 +67,25 @@ MIX_ENV=test iex -S mix
 # you should put here (like assets, translate files, migrations, seeds...)
 
 # mix.lock: Defines the specific version of the used libs
+
+
+# Ecto Migrations
+
+# Creates a migration file in /priv/repo/migrations
+# Migration files maps how the database is builded
+# It creates the migration file with a timestamp, that is used by Ecto
+# for know the order of creation of the tables
+mix ecto.gen.migration migration_name
+# ex: mix ecto.gen.migration create_users_table
+
+# Create database
+mix ecto.create
+
+# Run migration
+mix ecto.migrate
+
+# Reset local database
+mix ecto.reset
+
+# Drop database
+mix ecto.drop
