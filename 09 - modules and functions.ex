@@ -44,7 +44,7 @@ end
 # obs: search about tail call optimization and check if it's using
 
 
-# Capture Operator &
+# Implict anonimous function with Capture Operator &
 
 # The first & declare an anonimous function
 # The & inside of function capture parameter value
