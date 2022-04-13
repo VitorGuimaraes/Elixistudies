@@ -27,7 +27,7 @@ recompile force: true
 mix deps.get
 
 
-## Phoenix Project ###
+### Phoenix Project ###
 # Install Phenix:
 mix archive.install hex phx_new
 
@@ -52,7 +52,7 @@ mix new phx.new project_name
 # Run Phoenix Server
 mix phx.server
 
-# Phoenix Config
+## Phoenix Config ##
 
 # Check current env (iex -S mix)
 Mix.env
@@ -89,3 +89,86 @@ mix ecto.reset
 
 # Drop database
 mix ecto.drop
+
+
+
+### Creating a Phoenix project from zero ###
+1) Install dependencies:
+  To install Elixir:
+    wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && sudo dpkg -i erlang-solutions_2.0_all.deb
+    sudo apt update
+    sudo apt install esl-erlang && sudo apt install elixir
+
+  To install/upgrade Hex package manager:
+    mix local.hex
+
+  To install Phoenix framework:
+    mix archive.install hex phx_new
+
+  To install PostgreSQL (Linux):
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    sudo apt update && sudo apt install postgresql-12  postgresql-client-12 postgresql-12 libpq-dev postgresql-server-dev-12 postgresql-contrib -y
+
+    sudo -u postgres psql
+    ALTER USER postgres WITH PASSWORD 'your_password';
+
+    Install PgAdmin (optional):
+    sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add && sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update' && sudo apt install pgadmin4
+
+  To install inotify-tools:
+    It enables Phoenix Live Reloading feature
+    apt install inotify-tools
+
+2) Create the project:
+mix new phx.new project_name --no-html
+
+3) Install and configure Credo:
+https://github.com/rrrene/credo
+run: mix credo.gen.config
+In credo.exs, set ModuleDoc to false:
+{Credo.Check.Readability.ModuleDoc, false}
+
+4) Install Pkbdf2
+https://github.com/riverrun/pbkdf2_elixir
+
+5) Configure PostgreSQL
+In config/dev.exs and config/test.exs configure your username, password, database and hostname of postgreSQL.
+If you are using other port, set it too.
+
+6) Test database configuration
+run: mix ecto.setup
+
+7) Config Ecto to use UUID as primary and foreign key in config/config.exs
+
+8) Folder organization
+├── _build
+├── .elixir_ls
+├── assets
+├── config/
+│   ├── config.exs   # General application configuration
+│   ├── dev.exs
+│   ├── prod.exs
+│   ├── runtime.exs
+│   └── test.exs
+├── deps
+├── lib/
+│   ├── project_name/
+│   │   ├── application.ex # business model
+│   │   └── repo.ex        # communication with database
+│   └── project_name_web/
+│       ├── controllers    # controllers of the application
+│       └── views/
+│           └── router.ex  # routers of the application
+├── priv/ # assets, translate files, migrations...
+│   └── repo/
+│       └── migrations
+├── test
+├── credo.exs
+├── mix.exs
+└── mix.lock # define the running version of each lib
+
+9) Create tables in database and define your migrations (priv/repo/migrations)
+run: mix ecto.gen.migration create_table_name
+
+10) Create each schema in lib/project_name/schema_name
