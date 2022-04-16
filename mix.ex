@@ -33,17 +33,17 @@ mix archive.install hex phx_new
 
 # Create a new Phoenix project
 # --no-html: do not generate HTML views
-mix new phx.new project_name
+mix phx.new project_name
 
 # If you get red lines in the code after create a Phoenix project, do it:
 # mix deps.get
-# mix recompile
+# mix compile
 # wait it compile, so the errors will be solved
 
 # Config Ecto
 # If you are using PostgreSQL and you changed the password,
 # update it in config/dev.exs and config/test.exs.
-# Than, run "mix ecto.config" to check if is everything ok
+# Than, run "mix ecto.setup" to check if is everything ok
 
 # Credo
 # Run: mix credo.gen.config
@@ -118,10 +118,10 @@ mix ecto.drop
 
   To install inotify-tools:
     It enables Phoenix Live Reloading feature
-    apt install inotify-tools
+    sudo apt install inotify-tools
 
 2) Create the project:
-mix new phx.new project_name --no-html
+mix phx.new project_name --no-html
 
 3) Install and configure Credo:
 https://github.com/rrrene/credo
@@ -129,7 +129,7 @@ run: mix credo.gen.config
 In credo.exs, set ModuleDoc to false:
 {Credo.Check.Readability.ModuleDoc, false}
 
-4) Install Pkbdf2
+4) Install Pkbdf2 to use UUID primary and foreign keys
 https://github.com/riverrun/pbkdf2_elixir
 
 5) Configure PostgreSQL
@@ -139,7 +139,10 @@ If you are using other port, set it too.
 6) Test database configuration
 run: mix ecto.setup
 
-7) Config Ecto to use UUID as primary and foreign key in config/config.exs
+7) Config Ecto to use UUID as primary and foreign key in config/config.exs:
+config :app_name, App_name.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
 
 8) Folder organization
 ├── _build
@@ -172,3 +175,22 @@ run: mix ecto.setup
 run: mix ecto.gen.migration create_table_name
 
 10) Create each schema in lib/project_name/schema_name
+
+
+*) Routes:
+- Criar em lib/app_name_web/router.ex
+- Abaixo de "pipe_through :api" crie a rota:
+  get "/", WelcomeController, :index
+  explicando: get "address" ControllerName, :action
+
+*) Controllers
+- Criar em lib/app_name/controllers/controller_name.ex:
+defmodule AppnameWeb.ControllerName do
+  use RockeliveryWeb, :controller
+
+  def index(conn, _params) do
+    conn
+    |> put_status(:ok)
+    |> text("Wellcome :D")
+  end
+end
